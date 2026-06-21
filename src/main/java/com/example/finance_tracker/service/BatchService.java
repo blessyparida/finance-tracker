@@ -23,24 +23,40 @@ public class BatchService {
     job;
 
 
-    public void start()
-            throws Exception {
+    public void start(
 
-        launcher.run(
+String email
 
-                job,
+)
 
-                new JobParametersBuilder()
+throws Exception {
 
-                        .addLong(
-                                "time",
-                                System.currentTimeMillis()
-                        )
+launcher.run(
 
-                        .toJobParameters()
+job,
 
-        );
+new JobParametersBuilder()
 
-    }
+.addLong(
+
+"time",
+
+System.currentTimeMillis()
+
+)
+
+.addString(
+
+"email",
+
+email
+
+)
+
+.toJobParameters()
+
+);
+
+}
 
 }

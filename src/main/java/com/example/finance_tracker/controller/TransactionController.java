@@ -21,12 +21,28 @@ public class TransactionController {
 
     @PostMapping
 
-    public Transaction create(
-            @Valid
-            @RequestBody
-            CreateTransactionRequest request
-    ) {
-        return service.create(request);
-    }
+public Transaction create(
+
+        @Valid
+        @RequestBody
+        CreateTransactionRequest request,
+
+        @RequestHeader(
+                "Authorization"
+        )
+
+        String header
+
+) {
+
+    return service.create(
+
+            request,
+
+            header
+
+    );
+
+}
 
 }

@@ -56,4 +56,37 @@ StandardCharsets.UTF_8
 
 }
 
+public String extractEmail(
+String token
+) {
+
+return
+
+Jwts
+.parser()
+
+.verifyWith(
+
+new SecretKeySpec(
+
+SECRET.getBytes(),
+
+"HmacSHA256"
+
+)
+
+)
+
+.build()
+
+.parseSignedClaims(
+token
+)
+
+.getPayload()
+
+.getSubject();
+
+}
+
 }

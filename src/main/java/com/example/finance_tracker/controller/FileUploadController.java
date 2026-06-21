@@ -17,6 +17,7 @@ import java.util.List;
 import com.example.finance_tracker.entity.Transaction;
 
 import com.example.finance_tracker.service.BatchService;
+import com.example.finance_tracker.service.JWTService;
 
 @RestController
 @RequestMapping("/upload")
@@ -32,26 +33,55 @@ public class FileUploadController {
 
     private final BatchService batchService;
 
+    private final JWTService jwtService;
+
     @PostMapping
 
 public UploadResponse upload(
-        @RequestParam("file")
-        MultipartFile file
+
+@RequestParam(
+"file"
+)
+
+MultipartFile file,
+
+@RequestHeader(
+"Authorization"
+)
+
+String header
+
 )
 
 throws Exception {
 
-    List<Transaction> data =
-            parser.parse(file);
+String token =
 
-    service.saveAll(data);
+header.substring(
+7
+);
 
-    batchService.start();
+String email =
 
-    return new UploadResponse(
-            "Batch Import Started",
-            data.size()
-    );
+jwtService.extractEmail(
+token
+);
+
+parser.parse(
+file
+);
+
+batchService.start(
+email
+);
+
+return new UploadResponse(
+
+"Batch Import Started",
+
+1
+
+);
 
 }
 

@@ -4,6 +4,7 @@ import com.example.finance_tracker.dto.CategorySpendDTO;
 import com.example.finance_tracker.dto.MonthlySpendDTO;
 import com.example.finance_tracker.dto.TopExpenseDTO;
 import com.example.finance_tracker.dto.TrendDTO;
+
 import com.example.finance_tracker.service.AnalyticsService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,23 @@ public class AnalyticsController {
             MonthlySpendDTO
             >
 
-    get() {
+    get(
+
+            @RequestHeader(
+                    "Authorization"
+            )
+
+            String header
+
+    ) {
 
         return
+
                 service
-                        .monthlySpend();
+
+                        .monthlySpend(
+                                header
+                        );
     }
 
 
@@ -59,6 +72,7 @@ category() {
                     .categorySpend();
 }
 
+
 @GetMapping(
 "/trend"
 )
@@ -75,6 +89,7 @@ trend() {
 
                     .trend();
 }
+
 
 @GetMapping(
 "/top-expenses"

@@ -165,6 +165,52 @@ getMonthlySpend();
 @Query("""
 
 SELECT
+
+FUNCTION(
+'TO_CHAR',
+t.transactionDate,
+'YYYY-MM'
+),
+
+SUM(
+t.amount
+)
+
+FROM Transaction t
+
+WHERE
+
+t.user.email = :email
+
+GROUP BY
+
+FUNCTION(
+'TO_CHAR',
+t.transactionDate,
+'YYYY-MM'
+)
+
+ORDER BY
+
+FUNCTION(
+'TO_CHAR',
+t.transactionDate,
+'YYYY-MM'
+)
+
+""")
+
+List<Object[]>
+
+getMonthlySpendByUser(
+
+String email
+
+);
+
+@Query("""
+
+SELECT
 COALESCE(
 SUM(amount),
 0

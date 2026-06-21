@@ -2,6 +2,7 @@ package com.example.finance_tracker.service;
 
 import com.example.finance_tracker.dto.CategorySpendDTO;
 import com.example.finance_tracker.dto.MonthlySpendDTO;
+import com.example.finance_tracker.dto.TopExpenseDTO;
 import com.example.finance_tracker.dto.TrendDTO;
 import com.example.finance_tracker.repository.TransactionRepository;
 
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,94 +20,56 @@ public class AnalyticsService {
 
     private final TransactionRepository repository;
 
-    public List<MonthlySpendDTO>
-    monthlySpend() {
+
+    public List<MonthlySpendDTO> monthlySpend() {
 
         return repository
                 .getMonthlySpend()
-
                 .stream()
-
-                .map(
-                        row ->
-
-                                new MonthlySpendDTO(
-
-                                        row[0]
-                                                .toString(),
-
-                                        (
-                                                java.math.BigDecimal
-                                        )
-                                                row[1]
-                                )
-                )
-
+                .map(row -> new MonthlySpendDTO(
+                        row[0].toString(),
+                        (BigDecimal) row[1]
+                ))
                 .toList();
     }
 
-    public List<CategorySpendDTO>
 
-categorySpend() {
+    public List<CategorySpendDTO> categorySpend() {
 
-    return repository
+        return repository
+                .getCategorySpend()
+                .stream()
+                .map(row -> new CategorySpendDTO(
+                        row[0].toString(),
+                        (BigDecimal) row[1]
+                ))
+                .toList();
+    }
 
-            .getCategorySpend()
 
-            .stream()
+    public List<TrendDTO> trend() {
 
-            .map(
+        return repository
+                .getTrend()
+                .stream()
+                .map(row -> new TrendDTO(
+                        row[0].toString(),
+                        (BigDecimal) row[1]
+                ))
+                .toList();
+    }
 
-                    row ->
 
-                            new CategorySpendDTO(
+    public List<TopExpenseDTO> topExpenses() {
 
-                                    row[0]
-                                            .toString(),
-
-                                    (
-                                            java.math.BigDecimal
-                                    )
-
-                                            row[1]
-
-                            )
-
-            )
-
-            .toList();
-}
-
-public List<TrendDTO>
-
-trend() {
-
-    return repository
-
-            .getTrend()
-
-            .stream()
-
-            .map(
-
-                    row ->
-
-                            new TrendDTO(
-
-                                    row[0]
-                                            .toString(),
-
-                                    (
-                                            java.math.BigDecimal
-                                    )
-
-                                    row[1]
-
-                            )
-
-            )
-
-            .toList();
-}
+        return repository
+                .topExpenses()
+                .stream()
+                .map(row -> new TopExpenseDTO(
+                        row[0].toString(),
+                        (BigDecimal) row[1]
+                ))
+                .toList();
+    }
 
 }

@@ -13,6 +13,39 @@ extends JpaRepository<Transaction, Long> {
 
 SELECT
 
+t.description,
+
+SUM(
+t.amount
+)
+
+FROM Transaction t
+
+GROUP BY
+
+t.description
+
+ORDER BY
+
+SUM(
+t.amount
+)
+
+DESC
+
+LIMIT 5
+
+""")
+
+List<Object[]>
+
+topExpenses();
+
+
+@Query("""
+
+SELECT
+
 FUNCTION(
 'TO_CHAR',
 t.transactionDate,

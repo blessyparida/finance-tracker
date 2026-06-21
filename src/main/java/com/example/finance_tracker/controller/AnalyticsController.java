@@ -2,6 +2,7 @@ package com.example.finance_tracker.controller;
 
 import com.example.finance_tracker.dto.CategorySpendDTO;
 import com.example.finance_tracker.dto.MonthlySpendDTO;
+import com.example.finance_tracker.dto.TopExpenseDTO;
 import com.example.finance_tracker.dto.TrendDTO;
 import com.example.finance_tracker.service.AnalyticsService;
 
@@ -73,6 +74,23 @@ trend() {
             service
 
                     .trend();
+}
+
+@GetMapping(
+"/top-expenses"
+)
+
+public List<
+TopExpenseDTO
+>
+
+top() {
+
+    return
+
+            service
+
+                    .topExpenses();
 }
 
 }

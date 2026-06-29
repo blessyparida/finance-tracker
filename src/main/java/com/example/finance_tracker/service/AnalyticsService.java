@@ -25,34 +25,17 @@ public class AnalyticsService {
     private final JWTService jwtService;
 
 
-    public List<MonthlySpendDTO> monthlySpend(
-            String header
-    ) {
+    public List<MonthlySpendDTO> monthlySpend(String header)
+     {
 
-        String token =
-                header.substring(7);
+        String token = header.substring(7); //removes bearer
 
-        String email =
-                jwtService.extractEmail(token);
+        String email = jwtService.extractEmail(token);
 
-        return repository
-
-                .getMonthlySpendByUser(email)
-
-                .stream()
-
-                .map(
-                        row ->
-
-                                new MonthlySpendDTO(
-
-                                        row[0].toString(),
-
-                                        (BigDecimal)
-                                                row[1]
-
-                                )
-                )
+        return repository.getMonthlySpendByUser(email)
+                        .stream()
+                        .map(row -> new MonthlySpendDTO(row[0].toString(),(BigDecimal)row[1]))
+                
 
                 .toList();
     }
@@ -63,18 +46,7 @@ public class AnalyticsService {
         return repository
                 .getCategorySpend()
                 .stream()
-                .map(
-                        row ->
-
-                                new CategorySpendDTO(
-
-                                        row[0].toString(),
-
-                                        (BigDecimal)
-                                                row[1]
-
-                                )
-                )
+                .map(row -> new CategorySpendDTO(row[0].toString(),(BigDecimal)row[1]))
                 .toList();
     }
 

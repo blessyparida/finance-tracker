@@ -23,68 +23,34 @@ public class AuthService {
     private final JWTService jwtService;
 
 
-    public String register(
-            RegisterRequest request
-    ) {
+    public String register(RegisterRequest request)
+     {
 
-        User user =
-
-                User.builder()
-
-                        .email(
-                                request.email()
-                        )
-
-                        .password(
-
-                                encoder.encode(
-
-                                        request.password()
-                                )
-
-                        )
-
+        User user = User.builder()
+                        .email(request.email())
+                        .password(encoder.encode(request.password()))
                         .build();
 
-        repository.save(
-                user
-        );
+        repository.save(user);
 
         return "Registered";
     }
 
-    public String login(
-LoginRequest request
-) {
+    public String login(LoginRequest request) {
 
-User user =
+User user = repository.findByEmail(request.email()).orElseThrow();
 
-repository
+if (!encoder.matches
+        (request.password(),user.getPassword()
 
-.findByEmail(
-request.email()
-)
-
-.orElseThrow();
-
-if (
-
-!encoder.matches(
-
-request.password(),
-
-user.getPassword()
-
-)
-
-) {
+))
+ {
 
 throw new RuntimeException(
 "Invalid credentials"
 );
 
 }
-
 return jwtService.generate(
 user.getEmail()
 );

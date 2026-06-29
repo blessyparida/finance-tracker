@@ -27,21 +27,13 @@ public Transaction create(
         @RequestBody
         CreateTransactionRequest request,
 
-        @RequestHeader(
-                "Authorization"
-        )
+        @RequestHeader("Authorization")
 
         String header
 
 ) {
 
-    return service.create(
-
-            request,
-
-            header
-
-    );
+    return service.create(request,header);
 
 }
 

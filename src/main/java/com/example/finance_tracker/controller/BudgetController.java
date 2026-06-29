@@ -12,31 +12,21 @@ import java.math.BigDecimal;
 
 @RestController
 
-@RequestMapping(
-"/budget"
-)
+@RequestMapping("/budget")
 
 @RequiredArgsConstructor
 
 public class BudgetController {
 
-    private final
-    BudgetService service;
+    private final BudgetService service;
 
     @GetMapping
 
     public BudgetResponse
-    check(
-
-            @RequestParam
-            BigDecimal budget
+    check(@RequestParam BigDecimal budget
     ) {
 
-        return
-                service
-                        .evaluate(
-                                budget
-                        );
+        return service.evaluate(budget);
     }
 
 }

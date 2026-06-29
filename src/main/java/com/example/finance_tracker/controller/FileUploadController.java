@@ -1,15 +1,10 @@
 package com.example.finance_tracker.controller;
-
 import com.example.finance_tracker.dto.UploadResponse;
-
 import com.example.finance_tracker.service.TransactionService;
-
 import com.example.finance_tracker.util.csvParser;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -21,7 +16,6 @@ import com.example.finance_tracker.service.JWTService;
 
 @RestController
 @RequestMapping("/upload")
-
 @RequiredArgsConstructor
 
 public class FileUploadController {
@@ -39,9 +33,7 @@ public class FileUploadController {
 
 public UploadResponse upload(
 
-@RequestParam(
-"file"
-)
+@RequestParam("file")
 
 MultipartFile file,
 
@@ -76,12 +68,8 @@ email
 );
 
 return new UploadResponse(
-
 "Batch Import Started",
-
-1
-
-);
+1);
 
 }
 

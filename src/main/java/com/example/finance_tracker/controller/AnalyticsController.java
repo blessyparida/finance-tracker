@@ -15,97 +15,50 @@ import java.util.List;
 
 @RestController
 
-@RequestMapping(
-"/analytics"
-)
-
+@RequestMapping("/analytics")
 @RequiredArgsConstructor
 
 public class AnalyticsController {
+    private final AnalyticsService service;
 
-    private final
-    AnalyticsService service;
+    @GetMapping("/monthly")
 
+    public List<MonthlySpendDTO>
 
-    @GetMapping(
-"/monthly"
-)
-
-    public List<
-            MonthlySpendDTO
-            >
-
-    get(
-
-            @RequestHeader(
-                    "Authorization"
-            )
-
-            String header
-
-    ) {
-
-        return
-
-                service
-
-                        .monthlySpend(
-                                header
-                        );
-    }
+    get(@RequestHeader("Authorization")String header)
+         {
+        return service.monthlySpend(header);
+        }
 
 
-    @GetMapping(
-"/category"
-)
+    @GetMapping("/category")
 
-public List<
-CategorySpendDTO
->
+public List<CategorySpendDTO>
 
-category() {
+category()
+ {
 
-    return
-
-            service
-
-                    .categorySpend();
+        return service.categorySpend();
 }
 
 
-@GetMapping(
-"/trend"
-)
+@GetMapping("/trend")
 
-public List<
-TrendDTO
->
+public List<TrendDTO>
 
-trend() {
-
-    return
-
-            service
-
-                    .trend();
+trend()
+ {
+return service.trend();
 }
 
 
-@GetMapping(
-"/top-expenses"
-)
+@GetMapping("/top-expenses")
 
-public List<
-TopExpenseDTO
->
+public List<TopExpenseDTO>
 
 top() {
 
-    return
-
-            service
-
-                    .topExpenses();
+    return service.topExpenses();
 }
 
 }

@@ -19,43 +19,24 @@ import org.springframework.web.bind.annotation.*;
 
 public class AuthController {
 
-private final
-AuthService service;
+private final AuthService service;
 
 
-@PostMapping(
-"/register"
-)
+@PostMapping("/register")
 
-public String register(
+public String register(@RequestBody RegisterRequest request)
+ {
 
-@RequestBody
-
-RegisterRequest request
-
-) {
-
-return service.register(
-request
-);
+return service.register(request);
 
 }
 
-@PostMapping(
-"/login"
-)
+@PostMapping("/login")
 
-public String login(
+public String login(@RequestBody LoginRequest request)
+{
 
-@RequestBody
-
-LoginRequest request
-
-) {
-
-return service.login(
-request
-);
+return service.login(request);
 
 }
 

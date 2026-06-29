@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public record CreateTransactionRequest(
 
-        @NotBlank
+@NotBlank
         String description,
 
         @NotNull
